@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme._30_12_24_RecyclerViewDemo_Day2"
         tools:targetApi="31">
+        <activity android:name=".ProductDetailsActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">

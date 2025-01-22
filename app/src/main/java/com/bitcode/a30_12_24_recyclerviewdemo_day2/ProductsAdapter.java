@@ -1,10 +1,12 @@
 package com.bitcode.a30_12_24_recyclerviewdemo_day2;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +39,31 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View productView = layoutInflater.inflate(R.layout.product_view_holder,null);
 
+        productImageView = productView.findViewById(R.id.productImageView);
+        productTitleTxtView = productView.findViewById(R.id.productTitleTxtView);
+        productPriceTxtView = productView.findViewById(R.id.productPriceTxtView);
+
+//        productImageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(parent.getContext(),"Image View Clicked" , Toast.LENGTH_LONG).show();
+//            }
+//        });
+//
+//        productTitleTxtView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(parent.getContext(),"Title Text View Clicked", Toast.LENGTH_LONG).show();
+//            }
+//        });
+//
+//        productPriceTxtView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(parent.getContext(),"Price Text View Clicked", Toast.LENGTH_LONG).show();
+//            }
+//        });
+
         return new ProductViewHolder(productView);
     }
 
@@ -53,6 +80,35 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         productTitleTxtView.setText(product.productTitle);
         productPriceTxtView.setText(product.productPrice + " ");
         productImageView.setImageResource(R.drawable.ic_launcher_background);
+
+        productImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Toast.makeText(v.getContext(),"ImageViewClicked  " + product.productId, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        productTitleTxtView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),"TitleTextViewClicked  " + product.productTitle, Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(v.getContext(), ProductDetailsActivity.class);
+                intent.putExtra("product_title",product.productTitle);
+                intent.putExtra("product_price", product.productPrice);
+                intent.putExtra("product_image", product.imageId);
+                intent.putExtra("product_id", product.productId);
+
+                v.getContext().startActivity(intent);
+            }
+        });
+
+        productPriceTxtView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Toast.makeText(v.getContext(),"PriceTextViewClicked  " + product.productPrice, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
