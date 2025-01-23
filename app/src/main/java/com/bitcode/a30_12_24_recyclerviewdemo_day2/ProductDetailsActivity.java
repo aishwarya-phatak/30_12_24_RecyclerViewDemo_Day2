@@ -1,7 +1,9 @@
 package com.bitcode.a30_12_24_recyclerviewdemo_day2;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +16,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     ImageView imgView1;
     String title;
     int prId, prImageId, prPrice;
+    Product product;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,13 +36,21 @@ public class ProductDetailsActivity extends AppCompatActivity {
        Intent i = getIntent();
        Bundle b = i.getExtras();
 
-       title = b.getString("product_title");
-       prPrice = b.getInt("product_price");
-       prImageId = b.getInt("product_image");
-       prId = b.getInt("product_id");
+       //way 3
+        product = (Product) b.getSerializable("product");           //important
+        imgView1.setImageResource(R.drawable.ic_launcher_background);
+        txtView1.setText(product.productTitle);
+        txtView2.setText(product.productPrice + " ");
 
-       imgView1.setImageResource(R.drawable.ic_launcher_background);
-       txtView1.setText(title);
-       txtView2.setText(prPrice + " ");
+
+        //way 2
+//       title = b.getString("product_title");
+//       prPrice = b.getInt("product_price");
+//       prImageId = b.getInt("product_image");
+//       prId = b.getInt("product_id");
+//
+//       imgView1.setImageResource(R.drawable.ic_launcher_background);
+//       txtView1.setText(title);
+//       txtView2.setText(prPrice + " ");
     }
 }

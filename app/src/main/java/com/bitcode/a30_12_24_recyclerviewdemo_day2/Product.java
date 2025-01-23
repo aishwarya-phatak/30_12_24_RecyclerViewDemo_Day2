@@ -2,7 +2,9 @@ package com.bitcode.a30_12_24_recyclerviewdemo_day2;
 
 import androidx.annotation.NonNull;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     int productId;
     String productTitle;
     int productPrice;
